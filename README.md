@@ -1,8 +1,5 @@
 # Agentic AI with Semantic Kernel
 
-> [!Note]  
-> This repository compliments the following YouTube video: [Build an AI Agent that Controls Your App UI](https://youtu.be/_gpqHKWqbwA?si=WYGTSbLlAilLn8Zh)
-
 This sample demonstrates how to build a multi-agent AI system using [Semantic Kernel](https://github.com/microsoft/semantic-kernel). The system includes three agents:
 
 - **Planner** – creates a plan based on the user's input.
@@ -19,7 +16,7 @@ You can run the agents using either a local model (via [Ollama](https://ollama.c
 
 ### Run with Ollama
 
-To use a local Ollama-based model, configure the Ollama chat completion in the [`Init` method`](https://github.com/Alexgoon/agentic-ai-with-semantic-kernel/blob/f1b5f8390ba2669723910c4a252319e2bd4bb406/HealthyCoding_Agentic/Infrastructure/AgentService.cs#L17):
+To use a local Ollama-based model, configure the Ollama chat completion in the [`Init` method`](https://github.com/k-rheault/agentic-ai-with-semantic-kernel/blob/f1b5f8390ba2669723910c4a252319e2bd4bb406/HealthyCoding_Agentic/Infrastructure/AgentService.cs#L17):
 
 ```csharp
 builder.AddOllamaChatCompletion(modelId: "llama3.1:8b", endpoint: new Uri("http://localhost:11434/"));
@@ -34,7 +31,7 @@ This command will download and launch the LLaMA model locally.
 
 ### Run with OpenAI
 
-To use OpenAI instead of a local model, configure the OpenAI chat completion in the [`Init` method](https://github.com/Alexgoon/agentic-ai-with-semantic-kernel/blob/f1b5f8390ba2669723910c4a252319e2bd4bb406/HealthyCoding_Agentic/Infrastructure/AgentService.cs#L17)
+To use OpenAI instead of a local model, configure the OpenAI chat completion in the [`Init` method](https://github.com/k-rheault/agentic-ai-with-semantic-kernel/blob/f1b5f8390ba2669723910c4a252319e2bd4bb406/HealthyCoding_Agentic/Infrastructure/AgentService.cs#L17)
 
 ```csharp
 builder.AddOpenAIChatCompletion("gpt-4.1-mini", "[YOUR OPENAI API KEY]");
@@ -65,7 +62,7 @@ return new() { Name = name,
                Arguments = new KernelArguments(promptSettings)
 };}
 ```
-[(AgentService.cs: CreateAgent)](https://github.com/Alexgoon/agentic-ai-with-semantic-kernel/blob/a245564b60d9eeb0e859c29580346b076361d257/HealthyCoding_Agentic/Infrastructure/AgentService.cs#L50-L61)
+[(AgentService.cs: CreateAgent)](https://github.com/k-rheault/agentic-ai-with-semantic-kernel/blob/a245564b60d9eeb0e859c29580346b076361d257/HealthyCoding_Agentic/Infrastructure/AgentService.cs#L50-L61)
 
 3. **Add plugins (tools) to the Executor agent**:
 ```csharp
@@ -74,7 +71,7 @@ KernelPlugin customersPlugin = KernelPluginFactory.CreateFromObject(pluginsSourc
 kernel.Plugins.AddRange(plugins);
 };}
 ```
-[(AgentService.cs: Init)](https://github.com/Alexgoon/agentic-ai-with-semantic-kernel/blob/a245564b60d9eeb0e859c29580346b076361d257/HealthyCoding_Agentic/Infrastructure/AgentService.cs#L52)
+[(AgentService.cs: Init)](https://github.com/k-rheault/agentic-ai-with-semantic-kernel/blob/a245564b60d9eeb0e859c29580346b076361d257/HealthyCoding_Agentic/Infrastructure/AgentService.cs#L52)
 
 4. **Define process steps for each agent**:
 ```csharp
