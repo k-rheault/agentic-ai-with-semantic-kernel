@@ -49,7 +49,7 @@ var builder = Kernel.CreateBuilder();
 builder.AddOllamaChatCompletion(modelId: "llama3.1:8b", endpoint: new Uri("http://localhost:11434/"));
 builder.Services.AddKeyedSingleton(PlannerAgentStep.AgentServiceKey,
 ```
-[(AgentService.cs: Init)](https://github.com/Alexgoon/agentic-ai-with-semantic-kernel/blob/a245564b60d9eeb0e859c29580346b076361d257/HealthyCoding_Agentic/Infrastructure/AgentService.cs#L18-L20)
+[(AgentService.cs: Init)](https://github.com/k-rheault/agentic-ai-with-semantic-kernel/blob/a245564b60d9eeb0e859c29580346b076361d257/HealthyCoding_Agentic/Infrastructure/AgentService.cs#L18-L20)
 
 
 2. **Create agents using the `ChatCompletionAgent` class**:
@@ -103,7 +103,7 @@ public class ExecutorAgentStep : KernelProcessStep {
     }
 }
 ```
-[(AiProcessSteps.cs)](https://github.com/Alexgoon/agentic-ai-with-semantic-kernel/blob/a245564b60d9eeb0e859c29580346b076361d257/HealthyCoding_Agentic/Infrastructure/AiProcessSteps.cs#L17-L87)
+[(AiProcessSteps.cs)](https://github.com/k-rheault/agentic-ai-with-semantic-kernel/blob/a245564b60d9eeb0e859c29580346b076361d257/HealthyCoding_Agentic/Infrastructure/AiProcessSteps.cs#L17-L87)
 
 5. **Define the process flow** (i.e., how data is transferred between steps).  
    For example, the planner sends the plan to the reviewer, who then sends feedback back to the planner for refinement:
@@ -134,7 +134,7 @@ return new() { Name = name,
                Arguments = new KernelArguments(promptSettings)
 };}
 ```
-[(AgentService.cs: InitProcess)](https://github.com/Alexgoon/agentic-ai-with-semantic-kernel/blob/a245564b60d9eeb0e859c29580346b076361d257/HealthyCoding_Agentic/Infrastructure/AgentService.cs#L77-L108)
+[(AgentService.cs: InitProcess)](https://github.com/k-rheault/agentic-ai-with-semantic-kernel/blob/a245564b60d9eeb0e859c29580346b076361d257/HealthyCoding_Agentic/Infrastructure/AgentService.cs#L77-L108)
 
 6. **Implement human-in-the-loop support with an external client**:
   - **Add a user proxy step**
@@ -144,7 +144,7 @@ return new() { Name = name,
             StepEvents.PlanApprovedExternal]);
     };
     ```
-    [(AgentService.cs: InitProcess)](https://github.com/Alexgoon/agentic-ai-with-semantic-kernel/blob/a245564b60d9eeb0e859c29580346b076361d257/HealthyCoding_Agentic/Infrastructure/AgentService.cs#L82-L84)
+    [(AgentService.cs: InitProcess)](https://github.com/k-rheault/agentic-ai-with-semantic-kernel/blob/a245564b60d9eeb0e859c29580346b076361d257/HealthyCoding_Agentic/Infrastructure/AgentService.cs#L82-L84)
     
   - **Emit an external event**:
     ```csharp
@@ -153,7 +153,7 @@ return new() { Name = name,
             .EmitExternalEvent(userProxyStep, StepEvents.PlanApprovedExternal);
     };
     ```
-    [(AgentService.cs: InitProcess)](https://github.com/Alexgoon/agentic-ai-with-semantic-kernel/blob/a245564b60d9eeb0e859c29580346b076361d257/HealthyCoding_Agentic/Infrastructure/AgentService.cs#L99-L100)
+    [(AgentService.cs: InitProcess)](https://github.com/k-rheault/agentic-ai-with-semantic-kernel/blob/a245564b60d9eeb0e859c29580346b076361d257/HealthyCoding_Agentic/Infrastructure/AgentService.cs#L99-L100)
     
   - **Create a client message channel**:
     ```csharp
@@ -166,7 +166,7 @@ return new() { Name = name,
           public ValueTask Uninitialize() => ValueTask.CompletedTask;
         }
     ```
-    [(AgentService.cs: ExternalClient)](https://github.com/Alexgoon/agentic-ai-with-semantic-kernel/blob/a245564b60d9eeb0e859c29580346b076361d257/HealthyCoding_Agentic/Infrastructure/AgentService.cs#L137-L144)
+    [(AgentService.cs: ExternalClient)](https://github.com/k-rheault/agentic-ai-with-semantic-kernel/blob/a245564b60d9eeb0e859c29580346b076361d257/HealthyCoding_Agentic/Infrastructure/AgentService.cs#L137-L144)
     
   - **Pass the message channel to the process**:
     ```csharp
@@ -177,5 +177,5 @@ return new() { Name = name,
             },
         externalMessageChannel: new ExternalClient(actionCallback)));
     ```
-    [(AgentService.cs: StartNewTaskProcessAsync)](https://github.com/Alexgoon/agentic-ai-with-semantic-kernel/blob/a245564b60d9eeb0e859c29580346b076361d257/HealthyCoding_Agentic/Infrastructure/AgentService.cs#L118)
+    [(AgentService.cs: StartNewTaskProcessAsync)](https://github.com/k-rheault/agentic-ai-with-semantic-kernel/blob/a245564b60d9eeb0e859c29580346b076361d257/HealthyCoding_Agentic/Infrastructure/AgentService.cs#L118)
     
